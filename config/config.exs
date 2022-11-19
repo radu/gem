@@ -8,7 +8,10 @@
 import Config
 
 config :gems,
-  namespace: GEMS
+  namespace: GEMS,
+  github: "https://github.com/",
+  twitter: "https://twitter.com/",
+  insta: "https://instagram/"
 
 config :tailwind, version: "3.2.3", default: [
   args: ~w(
