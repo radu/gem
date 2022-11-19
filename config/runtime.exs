@@ -24,9 +24,9 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  app_name =
-    System.get_env("FLY_APP_NAME") ||
-      raise "FLY_APP_NAME not available"
+  app_name = flygems
+  #  System.get_env("FLY_APP_NAME") ||
+  #    raise "FLY_APP_NAME not available"
 
   host = System.get_env("HOST") || "#{app_name}.fly.dev"
 
