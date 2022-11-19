@@ -1,0 +1,21 @@
+<section class="content">
+  <h1 id="about">About</h1>
+  <p>
+    <u>G</u>lobally <u>E</u>ditable <u>M</u>atrix <u>S</u>screen.
+  </p>
+  <p>
+    GEMS is a blatant copy of <a href="https://gems.nathanwillson.com/">Nathan Wilson's project by the same name</a>.
+  </p>
+</section>
+<section class="content">
+  <p>The Region ID you're connected to is:</p>
+  <p class="content-center">
+    <label class="region">
+      <%= GEMS.Flyio.Region.current %>
+    </label>
+  </p>
+</section>
+<section class="content">
+  <h1>Code</h1>
+  <p>The code for the original GEMS project is available <a href={ Application.fetch_env!(:gems, :github) }>here</a>.</p>
+</section>

@@ -1,0 +1,28 @@
+<div id="colorpicker" class="control-row">
+  <div class="control-col">
+  <div class="pallet">
+  <%= for c <- color_swatches do %>
+  <div class="color-swatch" style={"background-color: #{color_string(c)}"}
+       phx-click="color-pick"
+       phx-value-hex={ c }></div>
+  <% end %>
+  </div>
+  </div>
+  <div class="control-col">
+    <label>Color</label>
+    <form class="control-col" phx-change="color" onsubmit="return false;">
+      <%= for v <- [:r, :g, :b] do %>
+      <div>
+        <label><%= v %></label>
+        <%= range_input :slider, v, id: v, class: "slider", min: 0, max: 255, value: @color[v], "data-value":  @color[v] %>
+      : <%= @color[v] %>
+      </div>
+      <% end %>
+    </form>
+  </div>
+    <div class="control-col-r">
+    <div class="graph">
+      <%= C.ColorPicker.graph(%{color: @color, w: 170, h: 120}) %>
+    </div>
+  </div>
+</div>
