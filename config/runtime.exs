@@ -25,8 +25,9 @@ if config_env() == :prod do
       """
 
   app_name = flygems
-  #  System.get_env("FLY_APP_NAME") ||
-  #    raise "FLY_APP_NAME not available"
+    System.get_env("FLY_APP_NAME") ||
+    System.get_env("APP_NAME") ||
+      "flygems"
 
   host = System.get_env("HOST") || "#{app_name}.fly.dev"
 
