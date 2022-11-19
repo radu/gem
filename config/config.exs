@@ -8,10 +8,7 @@
 import Config
 
 config :gems,
-  namespace: GEMS,
-  github: "https://github.com/",
-  twitter: "https://twitter.com/",
-  insta: "https://instagram/"
+  namespace: GEMS
 
 config :tailwind, version: "3.2.3", default: [
   args: ~w(
@@ -25,7 +22,7 @@ config :tailwind, version: "3.2.3", default: [
 
 # Configures the endpoint
 config :gems, GEMSWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host:  System.get_env("HOST") || System.get_env("PHX_HOST") || "localhost"],
   render_errors: [view: GEMSWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: GEMS.PubSub,
   live_view: [signing_salt: "SyZvC3lF"]

@@ -157,21 +157,21 @@ Hooks.Mounted = {
   }
 }
 
-Hooks.ColorPickerHook = {
-  mounted() {
-    console.log('ColorPicker mounted');
+Hooks.Pixel = {
+  mounted(){
+    const view = this;
 
-    if (document.getElementById(colorPickerId)) {
-      e = document.getElementById(colorPickerId);
-      colorPicker.appendTo(e);
-
-      const view = this;
-      
-      colorPicker.onChange(function() {
-        console.log("Color picked: ", colorPicker.getRGB());
-        view.pushEvent("color-select", {"color": colorPicker.getHexString()});
-      })
+    function matrixItem(e) {
+      view.pushEvent("matrix-item", {'col': view.el.getAttribute('phx-value-col'), 
+                                     'row': view.el.getAttribute('phx-value-row')});
     }
+
+    this.el.addEventListener('mousedown', matrixItem)
+    this.el.addEventListener('mouseover', e => {
+      if(e.buttons == 1 || e.buttons == 3){
+        matrixItem(e);
+      };
+    });
   }
 }
 

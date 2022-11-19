@@ -4,9 +4,10 @@
       <%= for row <- 0..@matrix.h - 1 do %>
         <% cell = GEMS.Matrix.get(@matrix, col, row) %>
         <div
+          id={"matrix-button-#{col}-#{row}"}
+          phx-hook="Pixel"
           class={"matrix-item matrix-item-#{@matrix.w}"}
           data-note={Enum.at(@notes,row)}
-          phx-click="matrix-item"
           phx-value-col={ col }
           phx-value-row={ row }
           style={"background-color:#{cell_color(cell)};"} >

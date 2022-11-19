@@ -10,7 +10,8 @@ if config_env() == :prod do
   config :gems,
     github: System.get_env("GITHUB"),
     twitter: System.get_env("TWITTER"),
-    insta: System.get_env("INSTAGRAM")
+    insta: System.get_env("INSTAGRAM"),
+    server: true
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
@@ -28,7 +29,7 @@ if config_env() == :prod do
     System.get_env("APP_NAME") ||
       "flygems"
 
-  host = System.get_env("HOST") || "#{app_name}.fly.dev"
+  host = System.get_env("HOST") || System.get_env("PHX_HOST") || "#{app_name}.fly.dev"
 
   config :gems, GEMSWeb.Endpoint,
     url: [host: host, port: 80],
