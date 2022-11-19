@@ -162,13 +162,16 @@ Hooks.Pixel = {
     const view = this;
 
     function matrixItem(e) {
+      e.preventDefault();
       view.pushEvent("matrix-item", {'col': view.el.getAttribute('phx-value-col'), 
                                      'row': view.el.getAttribute('phx-value-row')});
     }
 
-    this.el.addEventListener('mousedown', matrixItem)
-    this.el.addEventListener('mouseover', e => {
-      if(e.buttons == 1 || e.buttons == 3){
+    this.el.addEventListener('mousedown',  matrixItem);
+    // this.el.addEventListener('touchmove',  matrixItem);
+
+    this.el.addEventListener('mouseenter', e => {
+      if(e.buttons == 1){
         matrixItem(e);
       };
     });
