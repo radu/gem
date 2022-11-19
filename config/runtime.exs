@@ -24,8 +24,7 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  app_name = flygems
-    System.get_env("FLY_APP_NAME") ||
+  app_name = System.get_env("FLY_APP_NAME") ||
     System.get_env("APP_NAME") ||
       "flygems"
 
