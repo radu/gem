@@ -7,7 +7,7 @@ defmodule GEMS.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers() ++ [:surface],
+      compilers: [:gettext] ++ Mix.compilers(), # ++ [:surface],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -49,7 +49,7 @@ defmodule GEMS.MixProject do
       {:libcluster, "~> 3.3.0"},
       {:binary, "~> 0.0.5"},
       {:random_color, "~> 0.1.0"},
-      {:surface, "~> 0.9.0"},
+      #{:surface, "~> 0.9.1"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
     ]
   end

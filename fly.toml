@@ -1,12 +1,13 @@
-# fly.toml file generated for gems on 2021-11-23T20:08:34+09:00
+# fly.toml file generated for gemfly on 2022-11-18T20:24:23-08:00
 
-app = "gems"
-
+app = "gemfly"
 kill_signal = "SIGTERM"
 kill_timeout = 5
 processes = []
 
 [env]
+  PHX_HOST = "gemfly.fly.dev"
+  PORT = "8080"
 
 [experimental]
   allowed_public_ports = []
@@ -14,17 +15,17 @@ processes = []
 
 [[services]]
   http_checks = []
-  internal_port = 4000
+  internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
-
   [services.concurrency]
-    hard_limit = 50
-    soft_limit = 45
+    hard_limit = 25
+    soft_limit = 20
     type = "connections"
 
   [[services.ports]]
+    force_https = true
     handlers = ["http"]
     port = 80
 
@@ -33,7 +34,7 @@ processes = []
     port = 443
 
   [[services.tcp_checks]]
-    grace_period = "30s"  # allow some time for startup
+    grace_period = "1s"
     interval = "15s"
     restart_limit = 0
     timeout = "2s"

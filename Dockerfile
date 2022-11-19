@@ -99,3 +99,10 @@ RUN set -eux; \
   ln -nfs /app/$(basename *)/bin/$(basename *) /app/entry
 
 CMD /app/entry start
+# Appended by flyctl
+ENV ECTO_IPV6 true
+ENV ERL_AFLAGS "-proto_dist inet6_tcp"
+
+# Appended by flyctl
+ENV ECTO_IPV6 true
+ENV ERL_AFLAGS "-proto_dist inet6_tcp"
