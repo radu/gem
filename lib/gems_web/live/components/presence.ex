@@ -1,10 +1,11 @@
 defmodule GEMSWeb.Components.Presence do
   use Phoenix.Component
 
-  def count(%{users: users} = assigns) do
+  def count(assigns) do
+    assigns = assign(assigns, :users, assigns.users )
     ~H"""
     <div class="presence">
-      <span><%= users %></span>
+      <span><%= @users %></span>
       <img class="human"/>
     </div>
     """

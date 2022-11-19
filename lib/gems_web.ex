@@ -45,7 +45,7 @@ defmodule GEMSWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {GEMSWeb.LayoutView, "live.html"}
+        layout: {GEMSWeb.LayoutView, :live}
 
       import GEMSWeb.GEMSLiveHelper
 

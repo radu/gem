@@ -2,7 +2,7 @@ defmodule GEMS.Matrix.BinaryHelper do
   @moduledoc """
   Helper functions for bitwise/binary/bitstring operations.
   """
-  use Bitwise
+  import Bitwise
 
   @doc """
   Replaces a byte in a binarystring (of bytes)
