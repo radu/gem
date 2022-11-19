@@ -12,6 +12,6 @@ defmodule GEMSWeb.Components.Matrix do
   def active_column?(_current, _col), do: ""
 
   def cell_color(c) do
-    "\##{Binary.to_hex(c) |> String.slice(0..-3)}"
+    "\##{Binary.to_hex(c)}"
   end
 end

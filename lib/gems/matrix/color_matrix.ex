@@ -25,7 +25,7 @@ defmodule GEMS.Matrix.ColorMatrix do
   @impl GEMS.Matrix
   def new(size, opts \\ []) do
     grid_size = 64 * size
-    data_size = grid_size * 4
+    data_size = grid_size * 3
 
     board = Keyword.get(opts, :board) || zero_grid(grid_size)
 
@@ -41,7 +41,7 @@ defmodule GEMS.Matrix.ColorMatrix do
   """
   @impl GEMS.Matrix
   def get(%{board: b, w: w}, x, y) do
-    binary_part(b, calc_index(x, y ,w), 4)
+    binary_part(b, calc_index(x, y ,w), 3)
   end
 
   @spec set(%{:board => binary, :w => number, optional(any) => any}, number, number, binary) :: %{
@@ -53,23 +53,25 @@ defmodule GEMS.Matrix.ColorMatrix do
   Set an element in the matrixboardboardboard
   """
   @impl GEMS.Matrix
-  def set(%{board: b, w: w} = grid, x, y, c) do
+  def set(%{board: b, w: w} = grid, x, y, c888 = <<_c::24>>) do
     mat_size = byte_size(b) |> IO.inspect(label: 'matrix size')
 
     pix_addr = calc_index(x, y, w) |> IO.inspect(label: 'pixel address')
-    pix_after = mat_size - pix_addr - 4 |> IO.inspect(label: 'pixels after')
+    pix_after = mat_size - pix_addr - 3 |> IO.inspect(label: 'pixels after')
 
     prev_bytes = binary_part(b, 0, pix_addr)
-    next_bytes = binary_part(b, pix_addr + 4, pix_after)
+    next_bytes = binary_part(b, pix_addr + 3, pix_after)
 
-    %{grid | board: prev_bytes <> c <> next_bytes}
+    # c16 = c24 |> CvtColor.cvt(:rbg888, :rgb565)
+
+    %{grid | board: prev_bytes <> c888 <> next_bytes}
   end
 
   defp calc_index(x, y, w) do
-    ( y * w + x ) * 4
+    ( y * w + x ) * 3
   end
 
   defp zero_grid(grid_size) do
-    Binary.copy(<<0::32>>, grid_size)
+    Binary.copy(<<0::24>>, grid_size)
   end
 end

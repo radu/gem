@@ -198,9 +198,7 @@ defmodule GEMSWeb.GEMSLive do
       ) do
     socket = save_board_to_url(socket)
 
-    c = <<r::8>> <> <<g::8>> <> <<b::8>> |> IO.inspect(label: 'Color binary')
-
-    c = c <> <<0::8>>
+    c = <<r::8>> <> <<g::8>> <> <<b::8>>
 
     m = Matrix.set(m, x, y, c)
 

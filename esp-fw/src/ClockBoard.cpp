@@ -172,16 +172,14 @@ void onMessageCallback(WebsocketsMessage message) {
   const unsigned char* msg = (const unsigned char*)message.c_str();
   int length = message.rawData().length();
 
-  for(int i = 0 ; i < length; i+=4 ) {
-    unsigned char r = msg[i];
-    unsigned char g = msg[i+1];
-    unsigned char b = msg[i+2];
+  for(int i = 0 ; i < length; i+=2 ) {
+    uint16_t* color = (uint16_t*)(&msg[i]);
      
-    unsigned int pix = i / 4;
+    unsigned int pix = i / 2;
     unsigned char y = panelResY - pix / panelResX - 1;
     unsigned char x = pix % panelResX;
     
-    dma_display->drawPixel(x,y,dma_display->color565(r,g,b));
+    dma_display->drawPixel(x,y,*color);
   }
 
   ws.ping();

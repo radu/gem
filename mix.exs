@@ -49,6 +49,7 @@ defmodule GEMS.MixProject do
       {:libcluster, "~> 3.3.0"},
       {:binary, "~> 0.0.5"},
       {:random_color, "~> 0.1.0"},
+      #{:cvt_color, "~> 0.1.3"},
       #{:surface, "~> 0.9.1"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
     ]

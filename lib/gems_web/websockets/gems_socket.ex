@@ -8,6 +8,8 @@ defmodule GEMSWeb.Websockets.GEMSSocket do
 
   alias GEMS.MatrixStore, as: Store
 
+  import Bitwise
+
   require Logger
 
   @impl true
@@ -36,11 +38,20 @@ defmodule GEMSWeb.Websockets.GEMSSocket do
     {:ok, state}
   end
 
+  def convert_888_565(<<>>), do: <<>>
+
+  def convert_888_565(<<r::8, g::8, b::8 , rest::binary>>) do
+    (<< div(b*31, 255) :: 5, div(r*31,255) :: 5,  div(g*15,255) :: 6 >> |> IO.inspect ) <> convert_888_565(rest)
+  end
+
   @impl true
   def handle_info(:send_image, %{next_image_in: send_after} = state) do
     debug_msg(fn -> "handling send_image, next in #{send_after}" end)
     Process.send_after(self(), :send_image, send_after)
-    data = Store.get()
+
+    # TODO: configurable color depth
+    data = Store.get() |> convert_888_565
+
     if data do
       {:push, {:binary, data}, state}
     end
