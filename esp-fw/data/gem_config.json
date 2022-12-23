@@ -1,0 +1,8 @@
+{
+    "matrix" : {
+        "ws_host": "ws://gemfly.fly.dev/ws/token/1500/websocket",
+        "refresh_ms": 5000,
+        "token": "",
+        "is64": false  
+    }
+}
